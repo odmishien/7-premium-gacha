@@ -1,1 +1,1 @@
-web: github.com/odmishien/7-premium-gacha
+web: 7-premium-gacha
