@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/odmishien/7-premium-gacha",
+	"ImportPath": "7-premium-gacha",
 	"GoVersion": "go1.11",
 	"GodepVersion": "v80",
 	"Deps": []
