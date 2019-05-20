@@ -115,7 +115,7 @@ func main() {
 	http.HandleFunc("/", indexHTMLHandler)
 	http.HandleFunc("/gacha", gachaHTMLHandler)
 
-	if err := http.ListenAndServe(":", nil); err != nil {
+	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		panic(err)
 	}
 }
