@@ -30,7 +30,6 @@ type Data struct {
 
 func indexHTMLHandler(w http.ResponseWriter, r *http.Request) {
 	t := template.Must(template.ParseFiles("templates/index.html"))
-
 	if err := t.ExecuteTemplate(w, "index.html", nil); err != nil {
 		log.Fatal(err)
 	}
