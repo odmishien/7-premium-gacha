@@ -1,2 +1,3 @@
 # 7-premium-gacha
-セブンプレミアムでガチャを作りました。
+セブンプレミアムの商品でガチャを作りました。
+https://seven-premium-gacha.herokuapp.com/
