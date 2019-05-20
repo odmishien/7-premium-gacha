@@ -4,45 +4,49 @@
     <title>
       7-premium-gacha
     </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
   </head>
   <body>
-    <form method="POST" action="/gacha">
-      <select name="total">
-        <option value="250">¥250</option>
-        <option value="500">¥500</option>
-        <option value="750">¥750</option>
-        <option value="1000">¥1000</option>
-      </select>
-      <input type="checkbox" name="genre[]" value="cold" checked="checked" />冷蔵食品
-      <input type="checkbox" name="genre[]" value="frozen" checked="checked" />冷凍食品
-      <input type="checkbox" name="genre[]" value="confectionery" checked="checked" />お菓子・アイス
-      <input type="checkbox" name="genre[]" value="drink" checked="checked" />ドリンク
-      <input type="checkbox" name="genre[]" value="process" checked="checked" />常温・加工食品
-      <button type="submit">ガチャを回す</button>
-    </form><br><br>
-
-    <table>
-      <thead>
-        <tr>
-          <th>商品名</th>
-          <th>価格(税抜)</th>
-          <th>価格(税込)</th>
-        </tr>
-      </thead>
-      <tfoot>
-        <tr>
-          <th>合計</th>
-          <th>¥{{.Total}}</th>
-          <th>¥{{.TotalWithTax}}</th>
-        </tr>
-      </tfoot>
-      {{range .Products}}
-        <tr>
-          <td>{{.ProductName}}</td>
-          <td>{{.Price}}</td>
-          <td>{{.PriceWithTax}}</td>
-        </tr>
-      {{end}}
-    </table>
+    <div class="conatainer">
+      <div class="row">
+        <form method="POST" action="/gacha">
+          <select name="total">
+            <option value="250">¥250</option>
+            <option value="500">¥500</option>
+            <option value="750">¥750</option>
+            <option value="1000">¥1000</option>
+          </select>
+          <input type="checkbox" name="genre[]" value="cold" checked="checked" />冷蔵食品
+          <input type="checkbox" name="genre[]" value="frozen" checked="checked" />冷凍食品
+          <input type="checkbox" name="genre[]" value="confectionery" checked="checked" />お菓子・アイス
+          <input type="checkbox" name="genre[]" value="drink" checked="checked" />ドリンク
+          <input type="checkbox" name="genre[]" value="process" checked="checked" />常温・加工食品
+          <button class="btn btn-primary" type="submit">ガチャを回す</button>
+        </form><br><br>
+        <table>
+          <thead>
+            <tr>
+              <th>商品名</th>
+              <th>価格(税抜)</th>
+              <th>価格(税込)</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>合計</th>
+              <th>¥{{.Total}}</th>
+              <th>¥{{.TotalWithTax}}</th>
+            </tr>
+          </tfoot>
+          {{range .Products}}
+            <tr>
+              <td>{{.ProductName}}</td>
+              <td>¥{{.Price}}</td>
+              <td>¥{{.PriceWithTax}}</td>
+            </tr>
+          {{end}}
+        </table>
+      </div>
+    </div>
   </body>
 </html>
