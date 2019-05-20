@@ -2,6 +2,7 @@ $(function() {
   $('#gacha-button').on('click',function(e) {
     let form = $('#gacha-form').get()[0];
     let formData = new FormData(form);
+    console.log(formData);
 
     $.ajax({
       url: '/gacha',

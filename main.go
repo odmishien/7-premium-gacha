@@ -114,6 +114,9 @@ func getRandomElementFromProductsList(products []Product) Product {
 func main() {
 	http.HandleFunc("/", indexHTMLHandler)
 	http.HandleFunc("/gacha", gachaHTMLHandler)
+	http.HandleFunc("/static/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, r.URL.Path[1:])
+	})
 
 	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		panic(err)
