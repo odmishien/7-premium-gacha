@@ -58,17 +58,12 @@
             <tfoot>
               <tr>
                 <th>合計</th>
-                <th>¥{{.Total}}</th>
-                <th>¥{{.TotalWithTax}}</th>
+                <th id="result-total"></th>
+                <th id="result-total-with-tax"></th>
               </tr>
             </tfoot>
-            {{range .Products}}
-              <tr>
-                <td>{{.ProductName}}</td>
-                <td>¥{{.Price}}</td>
-                <td>¥{{.PriceWithTax}}</td>
-              </tr>
-            {{end}}
+            <tbody id="result-products">
+            </tbody>
           </table>
         </div>
       </div>
