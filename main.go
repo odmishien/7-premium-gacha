@@ -2,7 +2,9 @@ package main
 
 import (
 	"database/sql"
+	"encoding/json"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
@@ -23,9 +25,14 @@ type Product struct {
 }
 
 type Data struct {
-	Products     []Product
-	Total        int
-	TotalWithTax int
+	Products     []Product `json:"products"`
+	Total        int       `json:"total"`
+	TotalWithTax int       `json:"total_with_tax"`
+}
+
+type RequsetBody struct {
+	Total string   `json:"total"`
+	Genre []string `json:"genre"`
 }
 
 func indexHTMLHandler(w http.ResponseWriter, r *http.Request) {
@@ -36,19 +43,22 @@ func indexHTMLHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func gachaHTMLHandler(w http.ResponseWriter, r *http.Request) {
-	var total int
+	var total_string string
 	var genre []string
 	var result_total int
 	var result_total_with_tax int
 	var data Data
+	var posted RequsetBody
 
-	tmpls, _ := template.ParseFiles("templates/index.html")
-	tmpl := tmpls.Lookup("index.html")
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	r.ParseForm()
-	total_str := r.FormValue("total")
-	genre = r.Form["genre[]"]
-	total, _ = strconv.Atoi(total_str)
+	json.Unmarshal(body, &posted)
+	total_string = posted.Total
+	total, _ := strconv.Atoi(total_string)
+	genre = posted.Genre
 
 	products := getProductsList(total, genre)
 
@@ -61,9 +71,13 @@ func gachaHTMLHandler(w http.ResponseWriter, r *http.Request) {
 	data.Total = result_total
 	data.TotalWithTax = result_total_with_tax
 
-	if err := tmpl.Execute(w, data); err != nil {
+	res, err := json.Marshal(data)
+	if err != nil {
 		log.Fatal(err)
 	}
+
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	w.Write(res)
 }
 
 func getProductsList(total int, genre []string) []Product {
@@ -114,6 +128,9 @@ func getRandomElementFromProductsList(products []Product) Product {
 func main() {
 	http.HandleFunc("/", indexHTMLHandler)
 	http.HandleFunc("/gacha", gachaHTMLHandler)
+	http.HandleFunc("/static/", func(w http.ResponseWriter, r *http.Request) {
+		http.ServeFile(w, r, r.URL.Path[1:])
+	})
 
 	if err := http.ListenAndServe(":"+os.Getenv("PORT"), nil); err != nil {
 		panic(err)

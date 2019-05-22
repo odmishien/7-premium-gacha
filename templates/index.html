@@ -58,20 +58,17 @@
             <tfoot>
               <tr>
                 <th>合計</th>
-                <th>¥{{.Total}}</th>
-                <th>¥{{.TotalWithTax}}</th>
+                <th id="result-total"></th>
+                <th id="result-total-with-tax"></th>
               </tr>
             </tfoot>
-            {{range .Products}}
-              <tr>
-                <td>{{.ProductName}}</td>
-                <td>¥{{.Price}}</td>
-                <td>¥{{.PriceWithTax}}</td>
-              </tr>
-            {{end}}
+            <tbody id="result-products">
+            </tbody>
           </table>
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="./static/js/app.js"></script>
   </body>
 </html>
