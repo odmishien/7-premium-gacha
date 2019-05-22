@@ -12,7 +12,7 @@
       <div class="col-12 my-2">
         <h1 class="text-center">セブンプレミアム<br>ガチャ</h1>
       </div>
-        <form method="POST" action="/gacha">
+        <form method="POST" id="gacha-form" action="">
           <div class="form-group">
             <label class="font-weight-bold" for="total">予算</label>
             <select class="form-control" name="total" id="total">
@@ -44,7 +44,7 @@
               <label class="form-check-label font-weight-bold" for="process">常温・加工食品 </label>
             </div>
           </div>
-          <button class="btn btn-primary" type="submit">ガチャを回す</button>
+          <button class="btn btn-primary" id="gacha-button">ガチャを回す</button>
         </form>
         <div class="col-12 my-2">
           <table class="table table-striped">
